@@ -1,0 +1,82 @@
+class Solution {
+public:
+    vector<vector<int>> adj;
+    vector<int> subtreeSize;
+    vector<int> depth;
+    vector<vector<int>> parent;
+    vector<int> largestSubtreeSize;
+
+    void dfs(int node, int par, int dep) {
+        parent[node][0] = par;
+        depth[node] = dep;
+        subtreeSize[node] = 1;
+        int largest = 0;
+        
+        for (int i = 1; i < parent[node].size(); i++) {
+            if (parent[node][i-1] != -1) {
+                parent[node][i] = parent[parent[node][i-1]][i-1];
+            }
+        }
+        
+        for (int child : adj[node]) {
+            if (child != par) {
+                dfs(child, node, dep + 1);
+                subtreeSize[node] += subtreeSize[child];
+                largest = max(largest, subtreeSize[child]);
+            }
+        }
+        
+        largestSubtreeSize[node] = largest;
+    }
+
+    int lca(int u, int v) {
+        if (depth[u] < depth[v]) swap(u, v);
+        int log = parent[u].size();
+        for (int i = log - 1; i >= 0; i--) {
+            if (depth[u] - (1 << i) >= depth[v]) {
+                u = parent[u][i];
+            }
+        }
+        if (u == v) return u;
+        for (int i = log - 1; i >= 0; i--) {
+            if (parent[u][i] != parent[v][i]) {
+                u = parent[u][i];
+                v = parent[v][i];
+            }
+        }
+        return parent[u][0];
+    }
+
+    vector<int> getStability(int n, int q, vector<vector<int>>& edges, vector<vector<int>>& queries) {
+        adj.resize(n + 1);
+        subtreeSize.resize(n + 1);
+        depth.resize(n + 1);
+        largestSubtreeSize.resize(n + 1);
+        
+        int log = 0;
+        while ((1 << log) <= n) log++;
+        parent.assign(n + 1, vector<int>(log, -1));
+
+        for (auto& edge : edges) {
+            adj[edge[0]].push_back(edge[1]);
+            adj[edge[1]].push_back(edge[0]);
+        }
+
+        dfs(1, -1, 0);
+        //code aniiiiiiii
+        vector<int> results;
+        for (auto& query : queries) {
+            int u = query[0], v = query[1];
+            int lcaNode = lca(u, v);
+            int maxComponentSize = n - subtreeSize[lcaNode];
+            
+            // The largest component excluding the LCA's subtree.
+            if (largestSubtreeSize[lcaNode] != 0) {
+                maxComponentSize = max(maxComponentSize, largestSubtreeSize[lcaNode]);
+            }
+            
+            results.push_back(maxComponentSize);
+        }
+        return results;
+    }
+};
