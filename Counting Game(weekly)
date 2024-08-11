@@ -1,0 +1,28 @@
+
+from typing import List
+
+class Solution:
+    def getCount(self, n: int, arr: List[int], a: int, b: int) -> int:
+        count = 0
+     
+        for i in range(n):
+            current_sum = 0
+            
+            for j in range(i, n):
+                current_sum += arr[j]
+                
+                if j == i:
+                    count += 1
+                else:
+                    good = True
+                    for k in range(i, j):
+                        if not (a <= arr[k] + arr[j] <= b):
+                            good = False
+                            break
+                    
+                    if good:
+                        count += 1
+                    else:
+                        break  
+        
+        return count
