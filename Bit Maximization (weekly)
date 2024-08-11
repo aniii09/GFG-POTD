@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int getMax(int x) {
+        string binary = bitset<32>(x).to_string();
+        binary = binary.substr(binary.find('1'));
+        //code aniii
+        int maxVal = x;
+        int n = binary.length();
+        
+        for (int i = 0; i < n; i++) {
+            if (binary[i] == '0') {
+                int newVal = x | (1 << (n - 1 - i));
+                maxVal = max(maxVal, newVal);
+                
+                for (int j = i + 2; j < n; j++) {
+                    if (binary[j] == '0') {
+                        int newVal2 = newVal | (1 << (n - 1 - j));
+                        maxVal = max(maxVal, newVal2);
+                    }
+                }
+            }
+        }
+        
+        return maxVal;
+    }
+};
