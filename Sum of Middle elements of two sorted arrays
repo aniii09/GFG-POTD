@@ -1,3 +1,4 @@
+// THIS IS A JAVA CODE
 class Solution {
     public int SumofMiddleElements(int[] arr1, int[] arr2) {
         // code Anii
