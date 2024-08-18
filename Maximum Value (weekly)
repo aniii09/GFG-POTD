@@ -1,0 +1,28 @@
+class Solution {
+public:
+  //code Aniii
+    int maxValueArray(int n, int k, vector<int>& arr) {
+        int left = *min_element(arr.begin(), arr.end());
+        int right = *max_element(arr.begin(), arr.end()) + 1;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            long long required = 0; 
+            long long available = 0; 
+
+            for (int val : arr) {
+                if (val < mid) {
+                    required += (mid - val);
+                } else {
+                    available += (val - mid) / k;
+                }
+            }
+
+            if (available >= required) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+        return left - 1;
+    }
+};
