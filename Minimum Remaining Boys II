@@ -1,0 +1,39 @@
+class Solution {
+public:
+
+
+    bool dfs(int boy, vector<vector<int>>& adj, vector<bool>& visited, vector<int>& match) {
+        for (int girl : adj[boy]) {
+            if (!visited[girl]) {
+                visited[girl] = true;
+                if (match[girl] == -1 || dfs(match[girl], adj, visited, match)) {
+                    match[girl] = boy;
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    //code Aniii
+    int minRemaining(int n, vector<vector<int>>& boys, vector<vector<int>>& girls) {
+        vector<vector<int>> adj(n);
+
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < n; ++j) {
+                if (boys[i][0] < girls[j][0] && boys[i][1] < girls[j][1]) {
+                    adj[i].push_back(j);
+                }
+            }
+        }
+        vector<int> match(n, -1);  // match[i] stores the boy matched with girl i
+        int matches = 0;
+        for (int i = 0; i < n; ++i) {
+            vector<bool> visited(n, false);
+            if (dfs(i, adj, visited, match)) {
+                matches++;
+            }
+        }
+
+        return n - matches;
+    }
+};
