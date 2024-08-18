@@ -1,0 +1,19 @@
+class Solution { 
+public:
+//code Anii
+    int percentTax(long long income) { 
+        if (income < 300000) { 
+            return 0; // Less than 3 lakh 
+        } else if (income >= 300000 && income < 700000) { 
+            return 5; // Between 3 lakh and 7 lakh 
+        } else if (income >= 700000 && income < 1000000) { 
+            return 10; // Between 7 lakh and 10 lakh 
+        } else if (income >= 1000000 && income < 1200000) { 
+            return 15; // Between 10 lakh and 12 lakh 
+        } else if (income >= 1200000 && income < 1500000) { 
+            return 20; // Between 12 lakh and 15 lakh 
+        } else { 
+            return 30; // Above 15 lakh 
+        } 
+    } 
+};
