@@ -1,3 +1,52 @@
+""This is a python code""
+
+class Solution:
+    "code anii"
+    def __init__(self):
+        self.parent_map = {}  # A dictionary to keep track of parent nodes
+        self.target_node = None  # The target node we are searching for
+        self.min_time = 0  # The minimum time to reach the target node
+
+    def buildParentMap(self, node, target):
+        
+        if node.data == target:
+            self.target_node = node
+        if node.left:
+            self.parent_map[node.left] = node
+            self.buildParentMap(node.left, target)
+        if node.right:
+            self.parent_map[node.right] = node
+            self.buildParentMap(node.right, target)
+
+    def minTime(self, root, target):
+       
+        self.buildParentMap(root, target)
+
+        queue = deque()
+        queue.append((self.target_node, 0))
+        visited = set()
+
+        while queue:
+            current_node, time = queue.popleft()
+            visited.add(current_node)
+
+            if current_node in self.parent_map and self.parent_map[current_node] not in visited:
+                queue.append((self.parent_map[current_node], time + 1))
+            if current_node.left and current_node.left not in visited:
+                queue.append((current_node.left, time + 1))
+            if current_node.right and current_node.right not in visited:
+                queue.append((current_node.right, time + 1))
+
+            self.min_time = time  # Update the minimum time
+
+        return self.min_time
+
+
+------------------------------------------------------------------------------------------------
+
+qs-
+
+
 Given a binary tree and a node data called target. Find the minimum time required to burn the complete binary tree if the target is set on fire. It is known that in 1 second all nodes connected to a given node get burned. That is its left child, right child, and parent.
 Note: The tree contains unique values.
 
