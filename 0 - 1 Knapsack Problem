@@ -25,6 +25,8 @@
 
 // JAVA CODE
 
+   class Solution {
+    //code Aniii
     static int help(int n,int w,int wt[],int val[],int index,int dp[][]){
         if(index==n)return 0;
         if(dp[index][w]!=-1)return dp[index][w];
@@ -35,7 +37,6 @@
         }
         return dp[index][w] = Math.max(nonPick,pick);
     }
-    // Function to return max value that can be put in knapsack of capacity W.
     static int knapSack(int W, int wt[], int val[]) {
         // your code here
         int n = wt.length;
@@ -45,5 +46,5 @@
         }
         return help(n,W,wt,val,0,dp);
     }
-
+}
 
