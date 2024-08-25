@@ -43,6 +43,9 @@
 
 // JAVA CODE
 
+    class Solution {
+    //code ANI
+    // Function to count number of pairs such that x^y is greater than y^x.
     int binarySearch(int key,int brr[]){
         int low=0,high=brr.length-1,mid,index=-1;
         while(low<=high){
@@ -76,6 +79,7 @@
         }
         return ans;
     }
+}
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------
