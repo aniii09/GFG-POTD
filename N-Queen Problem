@@ -1,5 +1,8 @@
 // C++ CODE
 
+    class Solution{
+public:
+//code Aniii
     bool canPut(int row,int col,vector<int> temp){
         int r = row, c = col;
         while(r>=0 and c>=0){
@@ -40,6 +43,7 @@
         help(n,ans,temp,0);
         return ans;
     }
+};
 
 
 // JAVA CODE
