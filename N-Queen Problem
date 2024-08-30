@@ -48,6 +48,8 @@ public:
 
 // JAVA CODE
 
+   class Solution {
+    //code Aniii
     boolean canPut(int row,int col,ArrayList<Integer> temp){
         int r = row, c= col;
         while(r>=0 && c>=0){
@@ -70,6 +72,7 @@ public:
         }
         return true;
     }
+    //void
     void help(int n,ArrayList<ArrayList<Integer>> ans,ArrayList<Integer> temp,int row){
         if(row==n){
             ans.add(temp);
@@ -84,6 +87,7 @@ public:
             }
         }
     }
+    //public
     public ArrayList<ArrayList<Integer>> nQueen(int n) {
         // code here
         ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
@@ -93,6 +97,7 @@ public:
         return ans;
     }
 
+}
 
-// Time Complexity:- O(N!)
-// Space Complexity:- O(N!)
+
+)
