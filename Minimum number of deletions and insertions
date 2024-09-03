@@ -1,6 +1,9 @@
 // C++ CODE
 
-  int minOperations(string str1, string str2) 
+  class Solution{
+	public:
+	//code Yamraj
+	int minOperations(string str1, string str2) 
   { 
       // Your code goes here
       int n = str1.length(), m = str2.length();
@@ -13,7 +16,8 @@
           }
       }
       return n+m-2*dp[n][m];
-  } 
+  }  
+};
 
 
 // JAVA CODE
