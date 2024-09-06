@@ -1,3 +1,23 @@
+class Solution {
+  public:
+    
+    long long maxSubarraySum(vector<int> &arr) {
+        //CodeAniii
+        long long sum=0;
+        long long maxi=arr[0];
+        for(int i=0;i<arr.size();i++){
+            sum+=arr[i];
+            maxi=max(sum,maxi);
+            if(sum<0) sum=0;
+        }
+        return maxi;
+    }
+};
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+qs-
+
 Given an integer array arr[]. Find the contiguous sub-array(containing at least one number) that has the maximum sum and return its sum.
 
 Examples:
