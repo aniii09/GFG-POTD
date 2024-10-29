@@ -1,0 +1,64 @@
+class Solution {
+  public:
+    Node* partition(Node* head, Node* tail){
+        Node* pivot=head, *prev=head, *temp=head;
+        while(temp!=tail->next){
+            if(pivot->data > temp->data){
+                swap(prev->next->data, temp->data);
+                prev=prev->next;
+            }
+            temp=temp->next;
+        }
+        
+        swap(pivot->data, prev->data);
+        
+        return prev;
+    }
+  
+    void helper(Node* head, Node* tail){
+        if(!head || head==tail){
+            return;
+        }
+        
+        Node* pivot=partition(head, tail);
+        
+        helper(head, pivot);
+        helper(pivot->next, tail);
+        
+        return;
+    }
+  
+    struct Node* quickSort(struct Node* head) {
+        if(!head || !head->next) return head;
+        
+        Node* tail=head;
+        
+        while(tail->next){
+            tail=tail->next;
+        }
+
+--------------------------------------------------------------------------------
+
+You are given a Linked List. Sort the given Linked List using quicksort. 
+
+Examples:
+
+Input: Linked list: 1->6->2
+Output: 1->2->6
+
+Explanation:
+After sorting the nodes, we have 1, 2 and 6.
+Input: Linked list: 1->9->3->8
+Output: 1->3->8->9
+
+Explanation:
+After sorting the nodes, we have 1, 3, 8 and 9. 
+Constraints:
+1<= size of linked list <= 105
+        
+        helper(head, tail);
+        
+        return head;
+        
+    }
+};
