@@ -1,5 +1,6 @@
 class Solution {
   public:
+  ///code
     Node* partition(Node* head, Node* tail){
         Node* pivot=head, *prev=head, *temp=head;
         while(temp!=tail->next){
@@ -27,7 +28,6 @@ class Solution {
         
         return;
     }
-  
     struct Node* quickSort(struct Node* head) {
         if(!head || !head->next) return head;
         
@@ -36,7 +36,13 @@ class Solution {
         while(tail->next){
             tail=tail->next;
         }
-
+        
+        helper(head, tail);
+        
+        return head;
+        
+    }
+};
 --------------------------------------------------------------------------------
 
 You are given a Linked List. Sort the given Linked List using quicksort. 
