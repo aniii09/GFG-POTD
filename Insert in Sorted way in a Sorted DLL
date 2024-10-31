@@ -1,0 +1,68 @@
+class Solution {
+  public:
+//Code Aniii
+    Node* sortedInsert(Node* head, int x) {
+        Node* a= new Node();
+        a->data=x;
+        a->prev=NULL;
+        a->next=NULL;
+        
+        if(head==NULL) return a;
+        
+        // front
+        if(head->data >= x){
+            a->next=head;
+            head->prev=a;
+            
+            return a;
+        }
+        
+        Node* prev=NULL, *temp=head;
+        while(temp){
+            if(temp->data < x){
+                prev=temp;
+                temp=temp->next;
+            }
+            else{
+                temp->prev=a;
+                a->next=temp;
+                
+                a->prev=prev;
+                prev->next=a;
+                
+                return head;
+            }
+        }
+        
+        // rear
+        prev->next=a;
+        a->prev=prev;
+        
+        return head;
+    
+    }
+};
+
+
+-------------------------------------------------------------------
+
+qs-
+
+Given a sorted doubly linked list and an element x, you need to insert the element x into the correct position in the sorted Doubly linked list(DLL).
+
+Note: The DLL is sorted in ascending order
+
+Example:
+
+Input: LinkedList: 3->5->8->10->12 , x = 9
+
+Output: 3->5->8->9->10->12
+
+Explanation: Here node 9 is inserted in the Doubly Linked-List.
+Input: LinkedList: 1->4->10->11 , x = 15
+
+Output: 1->4->10->11->15
+
+Constraints:
+1 <= number of nodes <= 103
+1 <= node -> data , x <= 104
